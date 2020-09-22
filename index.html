@@ -4,24 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Recipe Search Engine</title>
     <!-- Bootstrap CSS CDN  -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Font Awesome CSS Icons (For cool glyphicons) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style.css" />
 
 </head>
 
 <body>
 
+    <header>
+        <h1>Recipe Generator</h1>
+    </header>
 
-    <!-- jQuery JS -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Code to the JavaScript File -->
-    <script src="scripts.js"></script>
+    <div class="container">
+
+        <!-- Row 1 -->
+        <div class="row">
+            <div class="col-sm-4" id="search-area">
+                <section id="search-area">
+                    <h4 id=boxheading><em>Enter your food ingredients</em></h4>
+                    <h6>Seperated by comma</h6>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ingredients name"
+                            aria-label="ingredients name" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+
+                    </div>
+
+                    <h4 id=boxheading><em>Enter your drink ingredients</em></h4>
+                    <h6>Seperated by comma</h6>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ingredients name"
+                            aria-label="ingredients name" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Search History</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </section>
+            </div>
+
+            <div id="foodrecipe-area" class="col-sm-4">
+                <h4>Here are your food choices</h4><br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+
+                            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spaghetti-puttanesca_1-1ce4e81.jpg?quality=90&resize=440%2C400"
+                                alt="pasta" style="width:100%">
+                            <div class="container">
+                                <h4><b>Spaghetti puttanesca</b></h4>
+                                <p>Description</p>
+                                <label for="id-of-input" class="custom-checkbox">
+                                    <input type="checkbox" id="id-of-input" />
+                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <span>Add to Favorite</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+
+                            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spaghetti-puttanesca_1-1ce4e81.jpg?quality=90&resize=440%2C400"
+                                alt="pasta" style="width:100%">
+                            <div class="container">
+                                <h4><b>Spaghetti puttanesca</b></h4>
+                                <p>Description</p>
+                                <label for="id-of-input" class="custom-checkbox">
+                                    <input type="checkbox" id="id-of-input" />
+                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <span>Add to Favorite</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="drinkrecipe-area" class="col-sm-4">
+                <h4>Here are your drink choices</h4><br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+
+                            <img src="https://noseychef.com/wp-content/uploads/2018/07/IMG_3754.jpg" alt="drink"
+                                style="width:100%">
+                            <div class="container">
+                                <h4><b>Tequila sunrise</b></h4>
+                                <p>Description</p>
+                                <label for="id-of-input" class="custom-checkbox">
+                                    <input type="checkbox" id="id-of-input" />
+                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <span>Add to Favorite</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+
+                            <img src="https://noseychef.com/wp-content/uploads/2018/07/IMG_3754.jpg" alt="drink"
+                                style="width:100%">
+                            <div class="container">
+                                <h4><b>Tequila sunrise</b></h4>
+                                <p>Description</p>
+                                <label for="id-of-input" class="custom-checkbox">
+                                    <input type="checkbox" id="id-of-input" />
+                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <span>Add to Favorite</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+    <div class="row">
+        <!-- jQuery JS -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Code to the JavaScript File -->
+        <script src="scripts.js"></script>
 </body>
 
 </html>

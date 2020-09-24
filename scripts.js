@@ -109,7 +109,7 @@ $("#clear").on("click", function (event) {
     ingredients.length = 0;
     console.log(ingredients);
     searchHistory.val("");
-<<<<<<< HEAD
+
 })
 
 // Cocktail API 
@@ -163,7 +163,7 @@ $("#searchDrink").on('click', function (event) {
 
     })
 })
-=======
+
 
 });
 
@@ -185,5 +185,3 @@ $("#favourite").on("click", function (e) {
     console.log(localStorage);
     console.log('--- --- ---');
 
-})
->>>>>>> 5c472edcbc2fb9a0d7a5f7ac2d079e0e607c6649

@@ -92,3 +92,55 @@ $("#clear").on("click", function (event) {
     console.log(ingredients);
     searchHistory.val("");
 })
+
+// Cocktail API 
+
+var cocktails = [];
+var drinkInput = $("#drinkInput");
+
+$("#searchDrink").on('click', function (event) {
+
+    var drinkInput = $("#drinkInput").val();
+
+    queryUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + drinkInput;
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        var drinks = response.drinks.slice(0, 10);
+
+
+        var results = $("#appendDrink");
+
+
+        for (var i = 0; i < drinks.length; i++) {
+
+            var column = $('<div class="col-sm-6">');
+            var card = $('<div class="card">');
+            var img = $('<img style="width:100%">');
+            var container = $('<div class="container">');
+            var recipeName = $('<h4 style="font-weight:bold">');
+            var recipeDescription = $('<p style="font-size:15px">');
+            var button = $('<button type="button" class="btn btn-primary favourite">');
+
+            recipeName.text(drinks[i].strDrink);
+            container.append(recipeName);
+
+            drinks.slice(0, 10);
+
+            button.text("Add to favourites");
+            container.append(button);
+
+            img.attr("src", drinks[i].strDrinkThumb);
+            recipeName.append(img);
+
+            card.append(container);
+            column.append(card);
+            results.append(column);
+
+        }
+
+    })
+})

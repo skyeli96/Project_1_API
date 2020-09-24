@@ -16,7 +16,8 @@ function foodSearchUrl() {
 //dynamically builds 2 card elements on the page
 function recipeCard(obj) {
     for (let i = 0; i < 2; i++) {
-        var recipe = obj.hits[random(obj.hits.length)].recipe;
+        var integer = random(obj.hits.length);
+        var recipe = obj.hits[integer].recipe;
 
         var appendFood = $("#appendFood");
 
@@ -28,12 +29,13 @@ function recipeCard(obj) {
         var container = $('<div class="container">');
         var recipeName = $('<h4 style="font-weight:bold">');
         var recipeDescription = $('<p style="font-size:15px">');
-        var button = $('<button type="button" class="btn btn-primary favourite">');
+        var button = $('<button type="button" class="btn btn-primary favouriteFood">');
 
         //sets the attributes of some of the new elements
         link.attr("href", recipe.url);
         img.attr("src", recipe.image);
         img.attr("alt", recipe.label);
+        button.attr("value", recipe.url);
 
         //fills the text/display of the new elements
         link.html(img);
@@ -99,6 +101,10 @@ $("#clear").on("click", function (event) {
     ingredients.length = 0;
     console.log(ingredients);
     searchHistory.val("");
+    localStorage.clear();
+    console.log('--- localStorage ---')
+    console.log(localStorage);
+    console.log('--- --- ---')
 });
 
 //
@@ -108,14 +114,14 @@ $(document).on({
     },
     ajaxStop: function () {
         $("#appendFood").removeClass("loader");
+        //event listener for add to favourites button
+        $(".favouriteFood").on("click", function (e) {
+            e.preventDefault();
+            localStorage.setItem('recipe', JSON.stringify($(".favouriteFood").val()));
+            console.log('--- localStorage ---')
+            console.log(localStorage);
+            console.log('--- --- ---')
+        })
     }
 });
 
-//event listener for add to favourites button
-$("#favourite").on("click", function (e) {
-    e.preventDefault();
-    localStorage.setItem("ingredients", Ingredients);
-    console.log('--- Local Storage ---');
-    console.log(localStorage);
-    console.log('--- --- ---');
-})

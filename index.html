@@ -28,33 +28,36 @@
         <!-- Row 1 -->
         <div class="row">
             <div class="col-sm-4" id="search-area">
-                <section id="search-area">
-                    <h4 id=boxheading><em>Enter your food ingredients</em></h4>
-                    <h6>Seperated by comma</h6>
-                    <div class="input-group mb-3">
-                        <input id="foodInput" type="text" class="form-control" placeholder="Ingredients name"
-                            aria-label="ingredients name" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchFood">Search</button>
-                        </div>
 
+                <!--- this section tag doesn't need to exist i think the div around it accomplishes the same thing -->
+                <h4 id=boxheading><em>Enter your food ingredients</em></h4>
+                <h6>Seperated by comma</h6>
+                <div class="input-group mb-3">
+                    <input id="foodInput" type="text" class="form-control" placeholder="Ingredients name"
+                        aria-label="ingredients name" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="searchFood">Search</button>
                     </div>
 
-                    <h4 id=boxheading><em>Enter your drink ingredients</em></h4>
-                    <h6>Seperated by comma</h6>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Ingredients name"
-                            aria-label="ingredients name" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchDrink">Search</button>
-                        </div>
+                </div>
+
+                <h4 id=boxheading><em>Enter your drink ingredients</em></h4>
+                <h6>Seperated by comma</h6>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingredients name" aria-label="ingredients name"
+                        aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="searchDrink">Search</button>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Search History</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly></textarea>
-                        <button class="btn btn-outline-secondary" type="button" id="clear">Clear</button>
-                    </div>
-                </section>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Search History</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly></textarea>
+                    <button class="btn btn-outline-secondary" type="button" id="clear">Clear</button>
+                </div>
+
+                <a href="favourites.html" target="_blank">Favourite recipes</a>
+
             </div>
 
             <div id="foodrecipe-area" class="col-sm-4">
@@ -77,6 +80,7 @@
                                 <h4><b>Tequila sunrise</b></h4>
                                 <p>Description</p>
                                 <label for="id-of-input" class="custom-checkbox">
+                                    <!--- these labels aren't doing anything -->
                                     <input type="checkbox" id="id-of-input" />
                                     <i class="glyphicon glyphicon-star-empty"></i>
                                     <i class="glyphicon glyphicon-star"></i>
@@ -95,6 +99,7 @@
                                 <p>Description</p>
                                 <label for="id-of-input" class="custom-checkbox">
                                     <input type="checkbox" id="id-of-input" />
+                                    <!--- repeated id -->
                                     <i class="glyphicon glyphicon-star-empty"></i>
                                     <i class="glyphicon glyphicon-star"></i>
                                     <span>Add to Favorite</span>
@@ -110,17 +115,11 @@
 
     </div>
 
-    </div>
-
-
-
-    <div class="row">
-        <!-- jQuery JS -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Code to the JavaScript File -->
-        <script src="scripts.js"></script>
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Code to the JavaScript File -->
+    <script src="scripts.js"></script>
 </body>
 
 </html>

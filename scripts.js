@@ -1,3 +1,4 @@
+var userHistory = [];
 
 var ingredients = [];
 var foodInput = $("#foodInput");
@@ -81,12 +82,15 @@ $("#searchFood").on("click", function (event) {
 
     //adds ingredients to search history
     ingredients.push(foodInput.val());
+    userHistory.push(foodInput.val());
 
     console.log("---Ingredients Array---");
     console.log(ingredients);
     console.log("--- --- ---");
+    localStorage.setItem("ingredients", JSON.stringify(userHistory));
 
-    searchHistory.val(parseArray(ingredients));
+
+    searchHistory.val(parseArray(userHistory));
 
     var url = foodSearchUrl();
 
@@ -124,9 +128,11 @@ $("#searchDrink").on('click', function (event) {
     var drinkInput = $("#drinkInput").val();
 
     cocktails.push(drinkInput);
+    userHistory.push(drinkInput);
     console.log(cocktails);
+    localStorage.setItem("ingredients", JSON.stringify(userHistory));
 
-    $("#exampleFormControlTextarea1").val(cocktails);
+    searchHistory.val(parseArray(userHistory));
 
     $("#appendDrink").empty();
 
@@ -209,7 +215,7 @@ $(document).on({
 //event listener for add to favourites button
 $(".favourite").on("click", function (e) {
     e.preventDefault();
-    localStorage.setItem("ingredients", Ingredients);
+    localStorage.setItem("ingredients", JSON.stringify(ingredients));
     console.log('--- Local Storage ---');
     console.log(localStorage);
     console.log('--- --- ---');

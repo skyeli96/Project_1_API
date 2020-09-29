@@ -1,3 +1,4 @@
+var userHistory = [];
 
 var ingredients = [];
 var foodInput = $("#foodInput");
@@ -83,12 +84,15 @@ $("#searchFood").on("click", function (event) {
 
     //adds ingredients to search history
     ingredients.push(foodInput.val());
+    userHistory.push(foodInput.val());
 
     console.log("---Ingredients Array---");
     console.log(ingredients);
     console.log("--- --- ---");
+    localStorage.setItem("ingredients", JSON.stringify(userHistory));
 
-    searchHistory.val(parseArray(ingredients));
+
+    searchHistory.val(parseArray(userHistory));
 
     var url = foodSearchUrl();
 
@@ -121,16 +125,29 @@ var drinkInput = $("#drinkInput");
 
 $("#searchDrink").on('click', function (event) {
 
+    event.preventDefault();
+
     var drinkInput = $("#drinkInput").val();
 
+    cocktails.push(drinkInput);
+    userHistory.push(drinkInput);
+    console.log(cocktails);
+    localStorage.setItem("ingredients", JSON.stringify(userHistory));
+
+    searchHistory.val(parseArray(userHistory));
+
+    $("#appendDrink").empty();
+
     queryUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + drinkInput;
+
 
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        var drinks = response.drinks.slice(0, 10);
+
+        var drinks = response.drinks.slice(0, 2);
 
 
         var results = $("#appendDrink");
@@ -138,29 +155,49 @@ $("#searchDrink").on('click', function (event) {
 
         for (var i = 0; i < drinks.length; i++) {
 
+            // Builds the card elements on the page 
             var column = $('<div class="col-sm-6">');
             var card = $('<div class="card">');
             var img = $('<img style="width:100%">');
+            var link = $('<a target="_blank">');
             var container = $('<div class="container">');
-            var recipeName = $('<h4 style="font-weight:bold">');
-            var recipeDescription = $('<p style="font-size:15px">');
+            var recipeName = $('<h4 style="font-weight:bold" id="name-' + i + '"> ');
+            var recipeDescription = $('<p style="font-size:15px" id="description-' + i + '">');
             var button = $('<button type="button" class="btn btn-primary favourite">');
 
-            recipeName.text(drinks[i].strDrink);
-            container.append(recipeName);
-
-            drinks.slice(0, 10);
-
-            button.text("Add to favourites");
-            container.append(button);
-
+            link.attr("href", drinks[i].strDrinkThumb);
             img.attr("src", drinks[i].strDrinkThumb);
-            recipeName.append(img);
+            img.attr("alt", drinks[i].strDrink);
 
+            link.html(img);
+            button.text("Add to favourites");
+            recipeName.text(drinks[i].strDrink);
+
+            container.append(img);
+            container.append(recipeName);
+            container.append(recipeDescription);
+            container.append(button);
             card.append(container);
+            card.append(link);
             column.append(card);
             results.append(column);
 
+            // API to get the cocktail instructions 
+
+            var description = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinks[i].strDrink;
+
+            $.ajax({
+                url: description,
+                method: "GET",
+                context: {
+                    currentIndex: i,
+                }
+            }).then(function (response) {
+                console.log(response);
+                console.log(this.currentIndex);
+
+                $("#description-" + this.currentIndex).text(response.drinks[0].strInstructions);
+            })
         }
 
     })
@@ -168,18 +205,17 @@ $("#searchDrink").on('click', function (event) {
 
 
 
-
-//
 $(document).on({
     ajaxStart: function () {
-        $("#appendFood").addClass("loader");
+        $("#appendFood, #appendDrink").addClass("loader");
     },
     ajaxStop: function () {
-        $("#appendFood").removeClass("loader");
+        $("#appendFood, #appendDrink").removeClass("loader");
     }
 });
 
 //event listener for add to favourites button
+
 
 //add to favorite section
 function addFavoriteEventshandlers() {
@@ -195,4 +231,12 @@ function addFavoriteEventshandlers() {
 
     });
 }
+$(".favourite").on("click", function (e) {
+    e.preventDefault();
+    localStorage.setItem("ingredients", JSON.stringify(ingredients));
+    console.log('--- Local Storage ---');
+    console.log(localStorage);
+    console.log('--- --- ---');
 
+
+});

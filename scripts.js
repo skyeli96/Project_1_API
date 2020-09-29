@@ -181,6 +181,8 @@ $("#searchDrink").on('click', function (event) {
             card.append(link);
             column.append(card);
             results.append(column);
+            //event listeners
+            addFavoriteEventshandlers();
 
             // API to get the cocktail instructions 
 
@@ -223,7 +225,7 @@ function addFavoriteEventshandlers() {
     $(".btn.btn-primary.favourite").off("click").on("click", function (event) {
         // debugger;
         // var cardClone = $(this).clone();
-        var cardClone = $(this).parents(".card").clone();
+        var cardClone = $(this).parents(".card").parent().clone();
         $("#thefavorite").append(cardClone);
         // append($(this).parents('.row').clone()).html();
 
@@ -231,6 +233,15 @@ function addFavoriteEventshandlers() {
 
     });
 }
+//clear favorite food
+$("#clearfavorite").on("click", function (event) {
+    event.preventDefault();
+    $("#thefavorite").empty();
+
+
+})
+
+
 $(".favourite").on("click", function (e) {
     e.preventDefault();
     localStorage.setItem("ingredients", JSON.stringify(ingredients));

@@ -214,6 +214,4 @@ $(".favourite").on("click", function (e) {
     console.log(localStorage);
     console.log('--- --- ---');
 
-
-})
-
+});

@@ -18,80 +18,85 @@ body {
 }
 
 header {
-    text-align: center;
-    /* padding: 20px; */
-    padding-top: 40px;
-    padding-bottom: 40px;
-    color: white;
-    background-color:rgb(121,122,126);
-    margin-bottom: 40px;
-  }
+  text-align: center;
+  /* padding: 20px; */
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: white;
+  background-color: rgb(121, 122, 126);
+  margin-bottom: 40px;
+}
 
 .input {
-    /* float:left; */
-    /* width:70%; */
-    height:550px;
-    padding:20px;
-    margin-left:20px;
-    margin-top:60px;
-    margin-bottom:60px;
-    background:white;
-    /* position:relative;  */
-} 
+  /* float:left; */
+  /* width:70%; */
+  height: 550px;
+  padding: 20px;
+  margin-left: 20px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background: white;
+  /* position:relative;  */
+}
 #drinkrecipe-area {
-    background:rgb(224,236,228);
+  background: rgb(224, 236, 228);
 }
 
 #foodrecipe-area {
-    background:rgb(247,242,231);
+  background: rgb(247, 242, 231);
 }
-#search-area{
-    background:rgb(216,211,205);
+#search-area {
+  background: rgb(216, 211, 205);
 }
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 100%;
-  }
-  
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-.container {
-    padding: 2px 16px;
-    font-size: larger;
-  }
-
-  label {
-    /* Presentation */
-    font-size: 20px
-  }
-  
-  /* Required Styling */
-  
-  label input[type="checkbox"] {
-    display: yes;
-  }
-  
-  .loader {
-    position: absolute;
-    left: 40%;
-    top: 40%;
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-@media (min-width: 1200px){
-.container {
-    max-width: 1400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
 }
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
+  font-size: larger;
+}
+
+label {
+  /* Presentation */
+  font-size: 20px;
+}
+
+/* Required Styling */
+
+label input[type="checkbox"] {
+  display: yes;
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1400px;
+  }
 }

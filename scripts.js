@@ -55,6 +55,8 @@ function recipeCard(obj) {
         card.append(container);
         column.append(card);
         appendFood.append(column);
+        //adding events listeners
+        addFavoriteEventshandlers();
     }
 };
 
@@ -165,7 +167,7 @@ $("#searchDrink").on('click', function (event) {
 })
 
 
-});
+
 
 //
 $(document).on({
@@ -178,10 +180,19 @@ $(document).on({
 });
 
 //event listener for add to favourites button
-$("#favourite").on("click", function (e) {
-    e.preventDefault();
-    localStorage.setItem("ingredients", Ingredients);
-    console.log('--- Local Storage ---');
-    console.log(localStorage);
-    console.log('--- --- ---');
+
+//add to favorite section
+function addFavoriteEventshandlers() {
+
+    $(".btn.btn-primary.favourite").off("click").on("click", function (event) {
+        // debugger;
+        // var cardClone = $(this).clone();
+        var cardClone = $(this).parents(".card").clone();
+        $("#thefavorite").append(cardClone);
+        // append($(this).parents('.row').clone()).html();
+
+
+
+    });
+}
 

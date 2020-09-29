@@ -4,6 +4,19 @@ var ingredients = [];
 var foodInput = $("#foodInput");
 var searchHistory = $("#exampleFormControlTextarea1");
 
+$(document).ready(function () {
+
+    var localHistory = JSON.parse(localStorage.getItem("ingredients"));
+    console.log(localHistory);
+
+    if (localHistory) {
+        userHistory = localHistory;
+        searchHistory.val(parseArray(userHistory));
+    }
+
+
+})
+
 //builds url for ajax call
 function foodSearchUrl() {
 
@@ -91,7 +104,6 @@ $("#searchFood").on("click", function (event) {
     console.log("--- --- ---");
     localStorage.setItem("ingredients", JSON.stringify(userHistory));
 
-
     searchHistory.val(parseArray(userHistory));
 
     var url = foodSearchUrl();
@@ -108,15 +120,6 @@ $("#searchFood").on("click", function (event) {
         recipeCard(response);
     })
 });
-
-//event listener for clear button
-$("#clear").on("click", function (event) {
-    event.preventDefault();
-    ingredients.length = 0;
-    console.log(ingredients);
-    searchHistory.val("");
-
-})
 
 // Cocktail API 
 
@@ -139,6 +142,8 @@ $("#searchDrink").on('click', function (event) {
     $("#appendDrink").empty();
 
     queryUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + drinkInput;
+
+    $("#drinkInput").val("");
 
 
     $.ajax({
@@ -216,8 +221,6 @@ $(document).on({
     }
 });
 
-//event listener for add to favourites button
-
 
 //add to favorite section
 function addFavoriteEventshandlers() {
@@ -233,6 +236,10 @@ function addFavoriteEventshandlers() {
 
     });
 }
+
+
+
+
 //clear favorite food
 $("#clearfavorite").on("click", function (event) {
     event.preventDefault();
@@ -242,6 +249,7 @@ $("#clearfavorite").on("click", function (event) {
 })
 
 
+//event listener for add to favourites button
 $(".favourite").on("click", function (e) {
     e.preventDefault();
     localStorage.setItem("ingredients", JSON.stringify(ingredients));
@@ -251,3 +259,12 @@ $(".favourite").on("click", function (e) {
 
 
 });
+
+//event listener for clear button
+$("#clear").on("click", function (event) {
+    event.preventDefault();
+    userHistory.length = 0;
+    console.log(userHistory);
+    searchHistory.val("");
+
+})

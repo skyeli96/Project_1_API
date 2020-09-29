@@ -231,6 +231,8 @@ function addFavoriteEventshandlers() {
 
     });
 }
+
+
 $(".favourite").on("click", function (e) {
     e.preventDefault();
     localStorage.setItem("ingredients", JSON.stringify(ingredients));

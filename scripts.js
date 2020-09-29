@@ -56,6 +56,8 @@ function recipeCard(obj) {
         card.append(container);
         column.append(card);
         appendFood.append(column);
+        //adding events listeners
+        addFavoriteEventshandlers();
     }
 };
 
@@ -202,7 +204,7 @@ $("#searchDrink").on('click', function (event) {
 })
 
 
-// Loader 
+
 $(document).on({
     ajaxStart: function () {
         $("#appendFood, #appendDrink").addClass("loader");
@@ -213,11 +215,28 @@ $(document).on({
 });
 
 //event listener for add to favourites button
+
+
+//add to favorite section
+function addFavoriteEventshandlers() {
+
+    $(".btn.btn-primary.favourite").off("click").on("click", function (event) {
+        // debugger;
+        // var cardClone = $(this).clone();
+        var cardClone = $(this).parents(".card").clone();
+        $("#thefavorite").append(cardClone);
+        // append($(this).parents('.row').clone()).html();
+
+
+
+    });
+}
 $(".favourite").on("click", function (e) {
     e.preventDefault();
     localStorage.setItem("ingredients", JSON.stringify(ingredients));
     console.log('--- Local Storage ---');
     console.log(localStorage);
     console.log('--- --- ---');
+
 
 });

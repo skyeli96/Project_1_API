@@ -2,19 +2,30 @@ var userHistory = [];
 
 var ingredients = [];
 var foodInput = $("#foodInput");
+
+var cocktails = [];
+var drinkInput = $("#drinkInput");
+
 var searchHistory = $("#exampleFormControlTextarea1");
 
 $(document).ready(function () {
 
-    var localHistory = JSON.parse(localStorage.getItem("ingredients"));
+    var foodHistory = JSON.parse(localStorage.getItem("ingredients"));
+    var drinkHistory = JSON.parse(localStorage.getItem("cocktails"));
+
+    var localHistory = [];
+    localHistory.push.apply(localHistory, foodHistory);
+    localHistory.push.apply(localHistory, drinkHistory);
+
     console.log(localHistory);
 
-    if (localHistory) {
+    if (localHistory !== null) {
         userHistory = localHistory;
         searchHistory.val(parseArray(userHistory));
+        Array.prototype.push.apply(ingredients, foodHistory);
+        Array.prototype.push.apply(cocktails, drinkHistory);
+        console.log(cocktails);
     }
-
-
 })
 
 //builds url for ajax call
@@ -24,7 +35,6 @@ function foodSearchUrl() {
     var appId = "bb8f4a04";
 
     var queryUrl = "https://api.edamam.com/search?q=" + ingredients + "&app_id=" + appId + "&app_key=" + appKey + "&from=0&to=20";
-
 
     return queryUrl;
 }
@@ -75,7 +85,7 @@ function recipeCard(obj) {
 };
 
 
-//creates 2 random numbers between 1 and 20
+//creates 2 random numbers between 1 and a specified length
 function random(length) {
     var number = Math.floor(Math.random() * length);
     return number;
@@ -92,25 +102,31 @@ function parseArray(array) {
 $("#searchFood").on("click", function (event) {
     event.preventDefault();
 
-    //clears previous result cards
-    $("#appendFood").empty();
+    if (foodInput.val() !== "") {
 
-    //adds ingredients to search history
-    ingredients.push(foodInput.val());
-    userHistory.push(foodInput.val());
+        //clears previous result cards
+        $("#appendFood").empty();
 
-    console.log("---Ingredients Array---");
-    console.log(ingredients);
-    console.log("--- --- ---");
-    localStorage.setItem("ingredients", JSON.stringify(userHistory));
+        //adds ingredients to search history
+        ingredients.push(foodInput.val().trim());
+        userHistory.push(foodInput.val().trim());
 
-    searchHistory.val(parseArray(userHistory));
+        console.log("---Ingredients Array---");
+        console.log(ingredients);
+        console.log("--- --- ---");
 
-    var url = foodSearchUrl();
+        localStorage.setItem("ingredients", JSON.stringify(ingredients));
+        console.log('--- Local Storage ---');
+        console.log(localStorage);
+        console.log('--- --- ---');
 
-    //clears the input after each search
-    foodInput.val("");
+        searchHistory.val(parseArray(userHistory));
 
+        var url = foodSearchUrl();
+
+        //clears the input after each search
+        foodInput.val("");
+    }
     $.ajax({
         url: url,
         method: "GET"
@@ -119,31 +135,36 @@ $("#searchFood").on("click", function (event) {
 
         recipeCard(response);
     })
+
 });
 
 // Cocktail API 
-
-var cocktails = [];
-var drinkInput = $("#drinkInput");
-
 $("#searchDrink").on('click', function (event) {
 
     event.preventDefault();
 
-    var drinkInput = $("#drinkInput").val();
 
-    cocktails.push(drinkInput);
-    userHistory.push(drinkInput);
+    cocktails.push(drinkInput.val().trim());
+    userHistory.push(drinkInput.val().trim());
+
+    console.log("---drink ingredients Array---");
     console.log(cocktails);
-    localStorage.setItem("ingredients", JSON.stringify(userHistory));
+    console.log("--- --- ---");
+
+    localStorage.setItem("cocktails", JSON.stringify(cocktails));
+    console.log('--- Local Storage ---');
+    console.log(localStorage);
+    console.log('--- --- ---');
 
     searchHistory.val(parseArray(userHistory));
 
+    //clear previous results
     $("#appendDrink").empty();
 
-    queryUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + drinkInput;
+    queryUrl = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + cocktails;
 
-    $("#drinkInput").val("");
+    //clear drink input
+    drinkInput.val("");
 
 
     $.ajax({
@@ -154,9 +175,7 @@ $("#searchDrink").on('click', function (event) {
 
         var drinks = response.drinks.slice(0, 2);
 
-
         var results = $("#appendDrink");
-
 
         for (var i = 0; i < drinks.length; i++) {
 
@@ -191,7 +210,7 @@ $("#searchDrink").on('click', function (event) {
 
             // API to get the cocktail instructions 
 
-            var description = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinks[i].strDrink;
+            var description = "https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=" + drinks[i].strDrink;
 
             $.ajax({
                 url: description,
@@ -206,12 +225,11 @@ $("#searchDrink").on('click', function (event) {
                 $("#description-" + this.currentIndex).text(response.drinks[0].strInstructions);
             })
         }
-
     })
 })
 
 
-
+//load states
 $(document).on({
     ajaxStart: function () {
         $("#appendFood, #appendDrink").addClass("loader");
@@ -232,39 +250,27 @@ function addFavoriteEventshandlers() {
         $("#thefavorite").append(cardClone);
         // append($(this).parents('.row').clone()).html();
 
-
-
     });
 }
-
-
 
 
 //clear favorite food
 $("#clearfavorite").on("click", function (event) {
     event.preventDefault();
     $("#thefavorite").empty();
-
-
 })
 
-
-//event listener for add to favourites button
-$(".favourite").on("click", function (e) {
-    e.preventDefault();
-    localStorage.setItem("ingredients", JSON.stringify(ingredients));
-    console.log('--- Local Storage ---');
-    console.log(localStorage);
-    console.log('--- --- ---');
-
-
-});
 
 //event listener for clear button
 $("#clear").on("click", function (event) {
     event.preventDefault();
     userHistory.length = 0;
+    ingredients.length = 0;
+    cocktails.length = 0;
     console.log(userHistory);
     searchHistory.val("");
-
-})
+    localStorage.clear();
+    console.log('--- Local Storage ---');
+    console.log(localStorage);
+    console.log('--- --- ---');
+});

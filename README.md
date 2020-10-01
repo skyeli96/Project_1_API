@@ -1,10 +1,10 @@
 # Project_1_API
 
-For this project we have created an application that generates food and drink recipes based on the ingredients that the user inputs. This application is powered by Javascript and jQuery code. The application will be responsive to all user screen sizes and has a . 
+For this project we have created an application that generates food and drink recipes based on the ingredients that the user inputs. This application is powered by Javascript and jQuery code. The application will be responsive to all user screen sizes. 
 
 ## Contents
 
-This application is composed of 3 files, index.html, script.js and style.css. There is also an images folder where the screenshots that are featured in tehis README file are located. 
+This application is composed of 3 files, index.html, script.js and style.css.
 
 ## User Story 
 
